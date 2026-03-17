@@ -8,10 +8,10 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"github.com/tcpdns/tcpdns/internal/config"
-	"github.com/tcpdns/tcpdns/internal/platform"
-	"github.com/tcpdns/tcpdns/internal/tunnel"
-	"github.com/tcpdns/tcpdns/internal/ui"
+	"github.com/danielehrhardt/tcp-over-dns/internal/config"
+	"github.com/danielehrhardt/tcp-over-dns/internal/platform"
+	"github.com/danielehrhardt/tcp-over-dns/internal/tunnel"
+	"github.com/danielehrhardt/tcp-over-dns/internal/ui"
 )
 
 var serverCmd = &cobra.Command{

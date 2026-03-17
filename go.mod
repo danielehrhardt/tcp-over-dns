@@ -1,4 +1,4 @@
-module github.com/tcpdns/tcpdns
+module github.com/danielehrhardt/tcp-over-dns
 
 go 1.26.1
 

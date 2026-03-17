@@ -9,11 +9,11 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	"github.com/tcpdns/tcpdns/internal/config"
-	"github.com/tcpdns/tcpdns/internal/platform"
-	"github.com/tcpdns/tcpdns/internal/proxy"
-	"github.com/tcpdns/tcpdns/internal/tunnel"
-	"github.com/tcpdns/tcpdns/internal/ui"
+	"github.com/danielehrhardt/tcp-over-dns/internal/config"
+	"github.com/danielehrhardt/tcp-over-dns/internal/platform"
+	"github.com/danielehrhardt/tcp-over-dns/internal/proxy"
+	"github.com/danielehrhardt/tcp-over-dns/internal/tunnel"
+	"github.com/danielehrhardt/tcp-over-dns/internal/ui"
 )
 
 var diagnoseCmd = &cobra.Command{
@@ -249,7 +249,7 @@ func runDiagnose(cmd *cobra.Command, args []string) error {
 	if failed > 0 {
 		fmt.Println()
 		ui.Info("Fix the failed checks above, then run 'tcpdns diagnose' again.")
-		ui.Info("For detailed help: https://github.com/tcpdns/tcpdns/docs/troubleshooting.md")
+		ui.Info("For detailed help: https://github.com/danielehrhardt/tcp-over-dns/docs/troubleshooting.md")
 	} else if warnings > 0 {
 		fmt.Println()
 		ui.Info("Some checks have warnings — review them above.")

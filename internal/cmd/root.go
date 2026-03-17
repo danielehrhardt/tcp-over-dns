@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/tcpdns/tcpdns/internal/ui"
+	"github.com/danielehrhardt/tcp-over-dns/internal/ui"
 )
 
 var (
@@ -37,7 +37,7 @@ Quick Start:
   3. tcpdns client connect       # Connect from your machine
   4. tcpdns proxy start          # Start SOCKS5 proxy
 
-Documentation: https://github.com/tcpdns/tcpdns`,
+Documentation: https://github.com/danielehrhardt/tcp-over-dns`,
 }
 
 var versionCmd = &cobra.Command{

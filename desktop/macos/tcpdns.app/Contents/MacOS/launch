@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+# tcpdns macOS app launcher
+# This script finds the tcpdns binary and starts the GUI.
+#
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+RESOURCES_DIR="$SCRIPT_DIR/../Resources"
+
+# Look for tcpdns binary in order of preference:
+# 1. Bundled in Resources/
+# 2. In PATH
+# 3. In common install locations
+
+TCPDNS=""
+
+if [[ -x "$RESOURCES_DIR/tcpdns" ]]; then
+    TCPDNS="$RESOURCES_DIR/tcpdns"
+elif command -v tcpdns &>/dev/null; then
+    TCPDNS="$(command -v tcpdns)"
+elif [[ -x /usr/local/bin/tcpdns ]]; then
+    TCPDNS="/usr/local/bin/tcpdns"
+elif [[ -x "$HOME/.local/bin/tcpdns" ]]; then
+    TCPDNS="$HOME/.local/bin/tcpdns"
+fi
+
+if [[ -z "$TCPDNS" ]]; then
+    osascript -e 'display dialog "tcpdns binary not found.\n\nInstall it first:\n  brew install danielehrhardt/tap/tcpdns\n\nOr download from:\n  github.com/danielehrhardt/tcp-over-dns/releases" with title "tcpdns" buttons {"OK"} default button "OK" with icon stop'
+    exit 1
+fi
+
+# Start the UI
+exec "$TCPDNS" ui

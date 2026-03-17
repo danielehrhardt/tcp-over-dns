@@ -4,12 +4,12 @@
 # Detects OS/arch and downloads the latest release binary
 #
 # Usage:
-#   curl -sSL https://raw.githubusercontent.com/tcpdns/tcpdns/main/scripts/install.sh | bash
+#   curl -sSL https://raw.githubusercontent.com/danielehrhardt/tcp-over-dns/main/scripts/install.sh | bash
 #
 
 set -euo pipefail
 
-REPO="tcpdns/tcpdns"
+REPO="danielehrhardt/tcp-over-dns"
 BINARY="tcpdns"
 INSTALL_DIR="/usr/local/bin"
 

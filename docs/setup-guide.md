@@ -78,7 +78,7 @@ SSH into your VPS and run the setup command. It handles everything automatically
 Install tcpdns on the VPS first:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/tcpdns/tcpdns/main/scripts/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/danielehrhardt/tcp-over-dns/main/scripts/install.sh | bash
 ```
 
 Then run setup:
@@ -104,7 +104,7 @@ At the end, it prints the password and the client command to connect.
 If you'd rather not install tcpdns on the server:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/tcpdns/tcpdns/main/scripts/vps-setup.sh | sudo bash
+curl -sSL https://raw.githubusercontent.com/danielehrhardt/tcp-over-dns/main/scripts/vps-setup.sh | sudo bash
 ```
 
 This script does the same thing but runs standalone.

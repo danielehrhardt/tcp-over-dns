@@ -7,8 +7,8 @@
 
 [![Go Version](https://img.shields.io/badge/go-1.21+-blue.svg)](https://golang.org)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Release](https://img.shields.io/github/v/release/tcpdns/tcpdns)](https://github.com/tcpdns/tcpdns/releases)
-[![CI](https://img.shields.io/github/actions/workflow/status/tcpdns/tcpdns/ci.yml?branch=main)](https://github.com/tcpdns/tcpdns/actions)
+[![Release](https://img.shields.io/github/v/release/danielehrhardt/tcp-over-dns)](https://github.com/danielehrhardt/tcp-over-dns/releases)
+[![CI](https://img.shields.io/github/actions/workflow/status/danielehrhardt/tcp-over-dns/ci.yml?branch=main)](https://github.com/danielehrhardt/tcp-over-dns/actions)
 
 **tcpdns** tunnels TCP traffic through DNS queries. It's a CLI wrapper around [iodine](https://code.kryo.se/iodine/) that automates the painful parts: installing dependencies, configuring firewalls, setting up systemd services, and resolving port conflicts.
 
@@ -54,30 +54,30 @@ Configure your browser or system proxy to `socks5://127.0.0.1:1080` and you're o
 
 ### Binary (recommended)
 
-Download the latest binary for your platform from [GitHub Releases](https://github.com/tcpdns/tcpdns/releases).
+Download the latest binary for your platform from [GitHub Releases](https://github.com/danielehrhardt/tcp-over-dns/releases).
 
 ```bash
 # macOS / Linux — one-liner installer
-curl -sSL https://raw.githubusercontent.com/tcpdns/tcpdns/main/scripts/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/danielehrhardt/tcp-over-dns/main/scripts/install.sh | bash
 ```
 
 ### Homebrew (macOS)
 
 ```bash
-brew install tcpdns/tap/tcpdns
+brew install danielehrhardt/tap/tcpdns
 ```
 
 ### Go
 
 ```bash
-go install github.com/tcpdns/tcpdns/cmd/tcpdns@latest
+go install github.com/danielehrhardt/tcp-over-dns/cmd/tcpdns@latest
 ```
 
 ### Docker
 
 ```bash
-docker pull ghcr.io/tcpdns/tcpdns
-docker run --rm --cap-add=NET_ADMIN ghcr.io/tcpdns/tcpdns client connect
+docker pull ghcr.io/danielehrhardt/tcp-over-dns
+docker run --rm --cap-add=NET_ADMIN ghcr.io/danielehrhardt/tcp-over-dns client connect
 ```
 
 ### VPS Setup Script
@@ -85,7 +85,7 @@ docker run --rm --cap-add=NET_ADMIN ghcr.io/tcpdns/tcpdns client connect
 Run this on your server to install everything without the CLI:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/tcpdns/tcpdns/main/scripts/vps-setup.sh | sudo bash
+curl -sSL https://raw.githubusercontent.com/danielehrhardt/tcp-over-dns/main/scripts/vps-setup.sh | sudo bash
 ```
 
 ---
@@ -205,7 +205,7 @@ advanced:
 Pull requests are welcome. For significant changes, open an issue first to discuss what you'd like to change.
 
 ```bash
-git clone https://github.com/tcpdns/tcpdns
+git clone https://github.com/danielehrhardt/tcp-over-dns
 cd tcpdns
 go build ./...
 go test ./...

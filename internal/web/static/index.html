@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tcpdns</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">&#9678;</span>
+        <span class="logo-text">tcpdns</span>
+      </div>
+      <nav class="nav">
+        <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
+        <button class="nav-btn" data-tab="settings">Settings</button>
+        <button class="nav-btn" data-tab="diagnostics">Diagnostics</button>
+        <button class="nav-btn" data-tab="logs">Logs</button>
+      </nav>
+    </header>
+
+    <!-- Dashboard Tab -->
+    <main class="tab-content" id="tab-dashboard">
+      <!-- Connection Card -->
+      <section class="card connection-card">
+        <div class="status-ring" id="status-ring">
+          <div class="status-dot" id="status-dot"></div>
+        </div>
+        <div class="connection-info">
+          <h2 id="connection-status">Checking...</h2>
+          <p class="connection-detail" id="connection-detail">Fetching status...</p>
+        </div>
+        <div class="connection-actions">
+          <button class="btn btn-primary btn-large" id="btn-connect">Connect</button>
+        </div>
+      </section>
+
+      <!-- Components Row -->
+      <div class="grid-2">
+        <!-- Tunnel Status -->
+        <section class="card">
+          <h3>DNS Tunnel</h3>
+          <div class="component-status">
+            <span class="indicator" id="tunnel-indicator"></span>
+            <span id="tunnel-status">Checking...</span>
+          </div>
+          <p class="detail" id="tunnel-domain">-</p>
+        </section>
+
+        <!-- Proxy Status -->
+        <section class="card">
+          <h3>SOCKS5 Proxy</h3>
+          <div class="component-status">
+            <span class="indicator" id="proxy-indicator"></span>
+            <span id="proxy-status">Checking...</span>
+          </div>
+          <div class="proxy-controls">
+            <button class="btn btn-small" id="btn-proxy">Start Proxy</button>
+            <span class="detail" id="proxy-addr">-</span>
+          </div>
+        </section>
+      </div>
+
+      <!-- System Info -->
+      <section class="card">
+        <h3>System</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Platform</span>
+            <span class="info-value" id="sys-platform">-</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">iodine</span>
+            <span class="info-value" id="sys-iodine">-</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">SSH</span>
+            <span class="info-value" id="sys-ssh">-</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Internet</span>
+            <span class="info-value" id="sys-internet">-</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Settings Tab -->
+    <main class="tab-content hidden" id="tab-settings">
+      <section class="card">
+        <h3>Connection Settings</h3>
+        <form id="settings-form">
+          <div class="form-group">
+            <label for="cfg-domain">Tunnel Domain</label>
+            <input type="text" id="cfg-domain" placeholder="t.yourdomain.com">
+            <p class="form-hint">The subdomain delegated to your VPS via NS record</p>
+          </div>
+          <div class="form-group">
+            <label for="cfg-password">Password</label>
+            <div class="input-row">
+              <input type="password" id="cfg-password" placeholder="Tunnel password">
+              <button type="button" class="btn btn-small" id="btn-gen-pass">Generate</button>
+              <button type="button" class="btn btn-small" id="btn-show-pass">Show</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cfg-tunnel-ip">Tunnel IP</label>
+            <input type="text" id="cfg-tunnel-ip" placeholder="10.0.0.1" value="10.0.0.1">
+          </div>
+
+          <h3>Proxy Settings</h3>
+          <div class="form-group">
+            <label for="cfg-proxy-listen">Listen Address</label>
+            <input type="text" id="cfg-proxy-listen" placeholder="127.0.0.1:1080" value="127.0.0.1:1080">
+          </div>
+          <div class="form-group">
+            <label for="cfg-ssh-user">SSH User</label>
+            <input type="text" id="cfg-ssh-user" placeholder="root" value="root">
+          </div>
+          <div class="form-group">
+            <label for="cfg-ssh-host">SSH Host</label>
+            <input type="text" id="cfg-ssh-host" placeholder="10.0.0.1" value="10.0.0.1">
+            <p class="form-hint">Usually same as tunnel IP</p>
+          </div>
+
+          <h3>Advanced</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cfg-record-type">DNS Record Type</label>
+              <select id="cfg-record-type">
+                <option value="auto">Auto (recommended)</option>
+                <option value="NULL">NULL</option>
+                <option value="TXT">TXT</option>
+                <option value="CNAME">CNAME</option>
+                <option value="MX">MX</option>
+                <option value="SRV">SRV</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="cfg-encoding">Encoding</label>
+              <select id="cfg-encoding">
+                <option value="auto">Auto (recommended)</option>
+                <option value="Base128">Base128</option>
+                <option value="Base64">Base64</option>
+                <option value="Base32">Base32</option>
+                <option value="Raw">Raw</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save Settings</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <!-- Diagnostics Tab -->
+    <main class="tab-content hidden" id="tab-diagnostics">
+      <section class="card">
+        <div class="card-header">
+          <h3>Diagnostics</h3>
+          <button class="btn btn-small" id="btn-run-diag">Run Checks</button>
+        </div>
+        <div id="diag-results">
+          <p class="empty-state">Click "Run Checks" to diagnose your setup.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Logs Tab -->
+    <main class="tab-content hidden" id="tab-logs">
+      <section class="card">
+        <div class="card-header">
+          <h3>Activity Log</h3>
+          <button class="btn btn-small" id="btn-refresh-logs">Refresh</button>
+        </div>
+        <div class="log-container" id="log-container">
+          <p class="empty-state">No log entries yet.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Toast -->
+    <div class="toast hidden" id="toast"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

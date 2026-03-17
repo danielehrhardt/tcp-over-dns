@@ -8,8 +8,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/tcpdns/tcpdns/internal/config"
-	"github.com/tcpdns/tcpdns/internal/ui"
+	"github.com/danielehrhardt/tcp-over-dns/internal/config"
+	"github.com/danielehrhardt/tcp-over-dns/internal/ui"
 )
 
 // Proxy manages a SOCKS5 proxy connection via SSH.

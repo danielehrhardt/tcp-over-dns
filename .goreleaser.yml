@@ -58,8 +58,8 @@ changelog:
 
 release:
   github:
-    owner: tcpdns
-    name: tcpdns
+    owner: danielehrhardt
+    name: tcp-over-dns
   draft: false
   prerelease: auto
   name_template: "{{.ProjectName}} v{{.Version}}"
@@ -70,12 +70,12 @@ release:
 
     **macOS (Homebrew):**
     ```bash
-    brew install tcpdns/tap/tcpdns
+    brew install danielehrhardt/tap/tcpdns
     ```
 
     **Linux/macOS (Script):**
     ```bash
-    curl -sSL https://raw.githubusercontent.com/tcpdns/tcpdns/main/scripts/install.sh | bash
+    curl -sSL https://raw.githubusercontent.com/danielehrhardt/tcp-over-dns/main/scripts/install.sh | bash
     ```
 
     **Manual:** Download the appropriate binary for your platform below.
@@ -89,7 +89,7 @@ release:
     ```
 
   footer: |
-    **Full Changelog**: https://github.com/tcpdns/tcpdns/compare/{{ .PreviousTag }}...{{ .Tag }}
+    **Full Changelog**: https://github.com/danielehrhardt/tcp-over-dns/compare/{{ .PreviousTag }}...{{ .Tag }}
 
 snapshot:
   version_template: "{{ incpatch .Version }}-next"

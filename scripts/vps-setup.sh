@@ -4,7 +4,7 @@
 # Automated server setup for TCP-over-DNS tunneling
 #
 # Usage:
-#   curl -sSL https://raw.githubusercontent.com/tcpdns/tcpdns/main/scripts/vps-setup.sh | sudo bash
+#   curl -sSL https://raw.githubusercontent.com/danielehrhardt/tcp-over-dns/main/scripts/vps-setup.sh | sudo bash
 #
 #   Or with options:
 #   sudo bash vps-setup.sh --domain t.example.com --password mypassword

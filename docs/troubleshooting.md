@@ -395,7 +395,7 @@ sudo iodine -f -v -P yourpassword t.yourdomain.com
 
 Run `tcpdns diagnose` and share the output when asking for help. It captures the most relevant state in one shot.
 
-Open an issue at [github.com/tcpdns/tcpdns/issues](https://github.com/tcpdns/tcpdns/issues) with:
+Open an issue at [github.com/danielehrhardt/tcp-over-dns/issues](https://github.com/danielehrhardt/tcp-over-dns/issues) with:
 - Your OS and version
 - Output of `tcpdns diagnose`
 - The exact error message from iodine (run with `--verbose` to get more detail)
