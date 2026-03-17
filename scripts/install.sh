@@ -10,6 +10,7 @@
 set -euo pipefail
 
 REPO="danielehrhardt/tcp-over-dns"
+PROJECT="tcp-over-dns"
 BINARY="tcpdns"
 INSTALL_DIR="/usr/local/bin"
 
@@ -66,7 +67,7 @@ get_latest_version() {
 }
 
 download_binary() {
-    ARCHIVE="${BINARY}_${VERSION}_${OS}_${ARCH}.tar.gz"
+    ARCHIVE="${PROJECT}_${VERSION}_${OS}_${ARCH}.tar.gz"
     URL="https://github.com/${REPO}/releases/download/v${VERSION}/${ARCHIVE}"
 
     info "Downloading ${URL}..."
