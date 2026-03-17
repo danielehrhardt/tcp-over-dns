@@ -206,7 +206,7 @@ func (s *Server) handleClientConnect(w http.ResponseWriter, r *http.Request) {
 		Domain   string `json:"domain"`
 		Password string `json:"password"`
 	}
-	json.NewDecoder(r.Body).Decode(&req)
+	_ = json.NewDecoder(r.Body).Decode(&req)
 	if req.Domain != "" {
 		cfg.Client.ServerDomain = req.Domain
 	}
@@ -424,13 +424,13 @@ func (s *Server) addLog(level, format string, args ...interface{}) {
 
 func writeJSON(w http.ResponseWriter, data interface{}) {
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(data)
+	_ = json.NewEncoder(w).Encode(data)
 }
 
 func writeError(w http.ResponseWriter, format string, args ...interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusBadRequest)
-	json.NewEncoder(w).Encode(map[string]string{
+	_ = json.NewEncoder(w).Encode(map[string]string{
 		"error": fmt.Sprintf(format, args...),
 	})
 }
@@ -469,7 +469,7 @@ func openURL(url string) {
 		cmd = exec.Command("cmd", "/c", "start", url)
 	}
 	if cmd != nil {
-		cmd.Start()
+		_ = cmd.Start()
 	}
 }
 

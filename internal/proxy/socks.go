@@ -62,7 +62,7 @@ func (p *Proxy) Start(cfg *config.Config) error {
 
 	// Monitor process in background
 	go func() {
-		cmd.Wait()
+		_ = cmd.Wait()
 		p.mu.Lock()
 		p.active = false
 		p.mu.Unlock()
@@ -85,7 +85,7 @@ func (p *Proxy) Stop() error {
 	}
 
 	// Also kill any SSH SOCKS proxy processes
-	exec.Command("pkill", "-f", "ssh -D").Run()
+	_ = exec.Command("pkill", "-f", "ssh -D").Run()
 
 	p.active = false
 	p.cmd = nil
@@ -113,7 +113,7 @@ func ProxyStatus() (bool, int, error) {
 	lines := strings.Split(strings.TrimSpace(string(output)), "\n")
 	if len(lines) > 0 && lines[0] != "" {
 		var pid int
-		fmt.Sscanf(lines[0], "%d", &pid)
+		_, _ = fmt.Sscanf(lines[0], "%d", &pid)
 		return true, pid, nil
 	}
 	return false, 0, nil

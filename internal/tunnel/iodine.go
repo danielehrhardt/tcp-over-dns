@@ -109,7 +109,7 @@ func ServerStatus() (bool, int, error) {
 	lines := strings.Split(strings.TrimSpace(string(output)), "\n")
 	if len(lines) > 0 && lines[0] != "" {
 		var pid int
-		fmt.Sscanf(lines[0], "%d", &pid)
+		_, _ = fmt.Sscanf(lines[0], "%d", &pid)
 		return true, pid, nil
 	}
 	return false, 0, nil
@@ -201,7 +201,7 @@ func (t *Tunnel) Disconnect() error {
 	}
 
 	// Also kill any running iodine client processes
-	exec.Command("sudo", "pkill", "-f", "iodine -").Run()
+	_ = exec.Command("sudo", "pkill", "-f", "iodine -").Run()
 
 	t.status = StatusDisconnected
 	t.cmd = nil
@@ -234,7 +234,7 @@ func ClientStatus() (bool, int, error) {
 	lines := strings.Split(strings.TrimSpace(string(output)), "\n")
 	if len(lines) > 0 && lines[0] != "" {
 		var pid int
-		fmt.Sscanf(lines[0], "%d", &pid)
+		_, _ = fmt.Sscanf(lines[0], "%d", &pid)
 		return true, pid, nil
 	}
 	return false, 0, nil

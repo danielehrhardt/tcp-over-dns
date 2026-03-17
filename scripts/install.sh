@@ -45,9 +45,22 @@ detect_platform() {
 }
 
 get_latest_version() {
-    VERSION=$(curl -sSL "https://api.github.com/repos/${REPO}/releases/latest" | grep '"tag_name"' | sed -E 's/.*"v?([^"]+)".*/\1/')
+    info "Fetching latest release..."
+    local response
+    response=$(curl -sSL -w "\n%{http_code}" "https://api.github.com/repos/${REPO}/releases/latest" 2>/dev/null) || true
+
+    local http_code
+    http_code=$(echo "$response" | tail -1)
+    local body
+    body=$(echo "$response" | sed '$d')
+
+    if [[ "$http_code" != "200" ]]; then
+        error "No releases found (HTTP ${http_code}). Check https://github.com/${REPO}/releases\n\n  To install from source instead:\n    go install github.com/${REPO}/cmd/tcpdns@latest"
+    fi
+
+    VERSION=$(echo "$body" | grep '"tag_name"' | head -1 | sed -E 's/.*"v?([^"]+)".*/\1/') || true
     if [[ -z "$VERSION" ]]; then
-        error "Could not determine latest version. Check https://github.com/${REPO}/releases"
+        error "Could not parse version from release. Check https://github.com/${REPO}/releases"
     fi
     info "Latest version: v${VERSION}"
 }
