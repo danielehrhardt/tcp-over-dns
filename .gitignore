@@ -2,7 +2,7 @@
 bin/
 dist/
 *.exe
-tcpdns
+/tcpdns
 
 # Test
 coverage.out
