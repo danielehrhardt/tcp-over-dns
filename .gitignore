@@ -1,0 +1,32 @@
+# Binaries
+bin/
+dist/
+*.exe
+tcpdns
+
+# Test
+coverage.out
+coverage.html
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Config (may contain passwords)
+.tcpdns/
+
+# Build
+vendor/
+
+# Task management
+.sisyphus/
+task.md
+
+ai.*.md

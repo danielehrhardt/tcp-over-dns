@@ -1,0 +1,95 @@
+version: 2
+
+env:
+  - CGO_ENABLED=0
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: tcpdns
+    main: ./cmd/tcpdns
+    binary: tcpdns
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      - goos: windows
+        goarch: arm64
+    ldflags:
+      - -s -w
+      - -X main.version={{.Version}}
+      - -X main.commit={{.ShortCommit}}
+      - -X main.date={{.Date}}
+    flags:
+      - -trimpath
+
+archives:
+  - id: default
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - README.md
+      - LICENSE
+      - docs/*
+      - scripts/vps-setup.sh
+
+checksum:
+  name_template: "checksums.txt"
+  algorithm: sha256
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^ci:"
+      - "^chore:"
+      - "Merge pull request"
+
+release:
+  github:
+    owner: tcpdns
+    name: tcpdns
+  draft: false
+  prerelease: auto
+  name_template: "{{.ProjectName}} v{{.Version}}"
+  header: |
+    ## TCP over DNS Tunnel — v{{.Version}}
+
+    ### Installation
+
+    **macOS (Homebrew):**
+    ```bash
+    brew install tcpdns/tap/tcpdns
+    ```
+
+    **Linux/macOS (Script):**
+    ```bash
+    curl -sSL https://raw.githubusercontent.com/tcpdns/tcpdns/main/scripts/install.sh | bash
+    ```
+
+    **Manual:** Download the appropriate binary for your platform below.
+
+    ### Quick Start
+    ```bash
+    tcpdns config init          # Set up configuration
+    tcpdns server setup         # Set up your VPS (run on server)
+    tcpdns client connect       # Connect from your machine
+    tcpdns proxy start          # Start SOCKS5 proxy
+    ```
+
+  footer: |
+    **Full Changelog**: https://github.com/tcpdns/tcpdns/compare/{{ .PreviousTag }}...{{ .Tag }}
+
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"
