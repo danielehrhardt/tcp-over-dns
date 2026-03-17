@@ -2,10 +2,9 @@ package cmd
 
 import (
 	"fmt"
-	"os"
 
-	"github.com/spf13/cobra"
 	"github.com/danielehrhardt/tcp-over-dns/internal/ui"
+	"github.com/spf13/cobra"
 )
 
 var (
@@ -86,9 +85,4 @@ func init() {
 
 Use "{{.CommandPath}} [command] --help" for more information about a command.
 `, ui.Dim, ui.Reset, ui.Bold, ui.Reset, ui.Bold, ui.Reset, ui.Bold, ui.Reset, ui.Bold, ui.Reset))
-}
-
-func exitWithError(msg string) {
-	ui.Error(msg)
-	os.Exit(1)
 }

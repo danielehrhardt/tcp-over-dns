@@ -8,12 +8,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/spf13/cobra"
 	"github.com/danielehrhardt/tcp-over-dns/internal/config"
 	"github.com/danielehrhardt/tcp-over-dns/internal/platform"
 	"github.com/danielehrhardt/tcp-over-dns/internal/proxy"
 	"github.com/danielehrhardt/tcp-over-dns/internal/tunnel"
 	"github.com/danielehrhardt/tcp-over-dns/internal/ui"
+	"github.com/spf13/cobra"
 )
 
 var diagnoseCmd = &cobra.Command{
@@ -278,7 +278,7 @@ func checkInternet() bool {
 	if err != nil {
 		return false
 	}
-	conn.Close()
+	_ = conn.Close()
 	return true
 }
 

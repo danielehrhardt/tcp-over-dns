@@ -26,14 +26,12 @@ var staticFiles embed.FS
 
 // Server manages the web UI HTTP server.
 type Server struct {
-	mu          sync.Mutex
-	port        int
-	tunnel      *tunnel.Tunnel
-	proxyMgr    *proxy.Proxy
-	logs        []LogEntry
-	maxLogs     int
-	subscribers []chan LogEntry
-	subMu       sync.Mutex
+	mu       sync.Mutex
+	port     int
+	tunnel   *tunnel.Tunnel
+	proxyMgr *proxy.Proxy
+	logs     []LogEntry
+	maxLogs  int
 }
 
 // LogEntry represents a log message for the UI.
@@ -454,7 +452,7 @@ func checkInternet() bool {
 	if err != nil {
 		return false
 	}
-	conn.Close()
+	_ = conn.Close()
 	return true
 }
 

@@ -7,11 +7,11 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/spf13/cobra"
 	"github.com/danielehrhardt/tcp-over-dns/internal/config"
 	"github.com/danielehrhardt/tcp-over-dns/internal/platform"
 	"github.com/danielehrhardt/tcp-over-dns/internal/tunnel"
 	"github.com/danielehrhardt/tcp-over-dns/internal/ui"
+	"github.com/spf13/cobra"
 )
 
 var serverCmd = &cobra.Command{
@@ -245,7 +245,7 @@ func runServerSetup(cmd *cobra.Command, args []string) error {
 	fmt.Println()
 	ui.Info("Make sure your DNS is configured:")
 	ui.Table([][]string{
-		{"A Record:", fmt.Sprintf("dns.yourdomain.com -> YOUR_VPS_IP")},
+		{"A Record:", "dns.yourdomain.com -> YOUR_VPS_IP"},
 		{"NS Record:", fmt.Sprintf("%s -> dns.yourdomain.com", cfg.Server.Domain)},
 	})
 	fmt.Println()
@@ -333,10 +333,10 @@ DNSStubListener=no
 	}
 
 	// Restart systemd-resolved
-	exec.Command("systemctl", "restart", "systemd-resolved").Run()
+	_ = exec.Command("systemctl", "restart", "systemd-resolved").Run()
 
 	// Also update /etc/resolv.conf to point to real DNS
-	exec.Command("bash", "-c", `ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf`).Run()
+	_ = exec.Command("bash", "-c", `ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf`).Run()
 
 	return nil
 }
@@ -377,7 +377,7 @@ func configureIptables(iface string) error {
 	}
 
 	// Try to persist rules
-	exec.Command("bash", "-c", "iptables-save > /etc/iptables/rules.v4 2>/dev/null || iptables-save > /etc/iptables.rules 2>/dev/null").Run()
+	_ = exec.Command("bash", "-c", "iptables-save > /etc/iptables/rules.v4 2>/dev/null || iptables-save > /etc/iptables.rules 2>/dev/null").Run()
 
 	return nil
 }
