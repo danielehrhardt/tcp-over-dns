@@ -119,7 +119,7 @@ generate_password() {
 prompt_config() {
     if [[ -z "$TUNNEL_DOMAIN" ]]; then
         echo -en "${BOLD}Tunnel domain (e.g., t.example.com): ${NC}"
-        read -r TUNNEL_DOMAIN
+        read -r TUNNEL_DOMAIN < /dev/tty
         if [[ -z "$TUNNEL_DOMAIN" ]]; then
             error "Domain is required. Set up DNS first:"
             echo "  1. A record:  dns.yourdomain.com -> YOUR_VPS_IP"
@@ -143,7 +143,7 @@ prompt_config() {
 
     if [[ "$SKIP_CONFIRM" != true ]]; then
         echo -en "${BOLD}Proceed with setup? [Y/n]: ${NC}"
-        read -r confirm
+        read -r confirm < /dev/tty
         if [[ "$confirm" =~ ^[Nn] ]]; then
             info "Aborted."
             exit 0
