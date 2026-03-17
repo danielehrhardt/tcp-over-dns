@@ -412,8 +412,8 @@ WantedBy=multi-user.target
 		return err
 	}
 
-	exec.Command("systemctl", "daemon-reload").Run()
-	exec.Command("systemctl", "enable", "tcpdns-server").Run()
+	_ = exec.Command("systemctl", "daemon-reload").Run()
+	_ = exec.Command("systemctl", "enable", "tcpdns-server").Run()
 
 	return nil
 }
